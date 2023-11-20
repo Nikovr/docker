@@ -1,0 +1,24 @@
+---
+# defaults file for docker
+apt_packages:
+  - ca-certificates
+  - curl
+  - gnupg
+
+apt_key_url: "https://download.docker.com/linux/ubuntu/gpg"
+
+apt_key_state: "present"
+
+apt_repository_repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+apt_repository_state: "present" 
+
+apt_docker_packages:
+  - docker
+  - docker.io
+  - docker-compose
+  - docker-registry
+
+apt_docker_state: "latest"
+
+add_docker_user: "vagrant"

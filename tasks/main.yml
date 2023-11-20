@@ -1,0 +1,27 @@
+---
+# tasks file for docker
+    - name: additional packages installation
+      apt: #название модуля
+        name: #перечисляем пакеты, которые хотим поставить
+          "{{apt_packages}}"
+        update-cache: true #указываем перед выполнением провести apt update
+    - name: Add docker GPG key
+      apt_key: #модуль
+        url: "{{apt_key_url}}"
+        state: "{{apt_key_present}}" #состояние
+    - name: Add repository into sources list
+      apt_repository:
+        repo: "{{apt_repository_repo}}"
+        state: "{{apt_repository_state}}"
+    - name: Install Docker
+      apt:
+        name: 
+          "{{apt_docker_packages}}"
+        state: "{{apt_docker_state}}" #ставим последнюю версию потому что мы модные
+        update-cache: true    
+    
+    - name: Add user to docker group
+      user:
+        name: "{{add_docker_user}}"
+        groups: docker
+        append: yes
